@@ -89,3 +89,7 @@ figure{
   margin: auto;
   width: 20%;
 }
+
+.is-invalid {
+  border-color: crimson;
+}

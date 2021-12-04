@@ -7,9 +7,7 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
-.container{
-  display: none;
-}
+
 .contenido{
   padding-top: 160px;
 }
@@ -90,6 +88,19 @@ figure{
   width: 20%;
 }
 
+.is-valid {
+  border-color: green;
+}
+
 .is-invalid {
-  border-color: crimson;
+  border-color: red;
+  color: crimson;
+}
+
+small {
+  color: crimson;
+}
+
+.bttn-invalid {
+  background-color: gray;
 }

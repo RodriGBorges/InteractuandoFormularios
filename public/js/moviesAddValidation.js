@@ -1,6 +1,6 @@
 window.addEventListener('load', () => {
-    let now = new Date()
-    console.log('Se vinculó correctamente', now);
+
+    console.log('Se vinculó correctamente');
     const qs = (tag) => {
         return document.querySelector(tag)
     }
@@ -11,6 +11,9 @@ window.addEventListener('load', () => {
         if (!arr.includes(false)) {
             button.disabled = false
             button.classList.remove('bttn-invalid')
+        } else {
+            button.disabled = true
+            button.classList.add('bttn-invalid')
         }
     }
 
@@ -23,14 +26,23 @@ window.addEventListener('load', () => {
     const smallAw = qs('.awards')
     const smallTitle = qs('small.title')
     const smallAwards = qs('small.awards')
+    const smallGenre = qs('small.genre')
+    const smallLen = qs('small.length')
+    const smallDate = qs('small.date')
+    const smallRating = qs('small.rating')
     const button = qs('button.botonAgregar')
     const len = qs('#length')
-    const smallLen = qs('small.length')
+    const genre = qs('select#genre_id')
+    const date = qs('#date')
+    const rating = qs('#rating')
 
     const validate = {
         title: false,
+        rating: false,
         awards: false,
-        len: false
+        len: false,
+        genre: false,
+        date: false
 
     }
 
@@ -55,7 +67,21 @@ window.addEventListener('load', () => {
         funcValidate(validate)
     })
 
-    
+    rating.addEventListener('input', (e) => {
+        if (e.target.value < 0 || e.target.value > 10) {
+            rating.classList.add('is-invalid')
+            rating.classList.remove('is-valid')
+            smallRating.innerHTML = "El rating debe ser entre 0 y 10"
+            validate.rating = false
+        } else {
+            rating.classList.remove('is-invalid')
+            rating.classList.add('is-valid')
+            smallRating.innerHTML = ''
+            validate.rating = true
+        }
+
+        funcValidate(validate)
+    })
 
     awards.addEventListener('input', (e) => {
         if (e.target.value < 0 || e.target.value > 10) {
@@ -89,6 +115,44 @@ window.addEventListener('load', () => {
             smallLen.innerHTML = ''
             validate.len = true
 
+        }
+
+        funcValidate(validate)
+    })
+
+
+    date.addEventListener('input', (e) => {
+        const now = new Date()
+        let fecha = Date.parse(e.target.value)
+        let actual = Date.parse(now)
+
+        if (actual < fecha) {
+            date.classList.add('is-invalid')
+            date.classList.remove('is-valid')
+            smallDate.innerHTML = "La fecha tiene que ser anterior a la fecha actual"
+            validate.date = false
+        } else {
+            date.classList.remove('is-invalid')
+            date.classList.add('is-valid')
+            smallDate.innerHTML = ""
+            validate.date = true
+        }
+
+        funcValidate(validate)
+    })
+
+
+    genre.addEventListener('input', (e) => {
+        if (e.target.value < 1 || e.target.value > 12) {
+            genre.classList.add('is-invalid')
+            genre.classList.remove('is-valid')
+            smallGenre.innerHTML = "Debes seleccionar un género"
+            validate.genre = false
+        } else {
+            genre.classList.add('is-valid')
+            genre.classList.remove('is-invalid')
+            smallGenre.innerHTML = ""
+            validate.genre = true
         }
 
         funcValidate(validate)

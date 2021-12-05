@@ -89,6 +89,7 @@ figure{
 }
 
 .is-valid {
+  color: green;
   border-color: green;
 }
 
